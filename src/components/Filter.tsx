@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 function Filter (): JSX.Element {
   const [filterState, setFilterState] = useState({
@@ -8,7 +8,7 @@ function Filter (): JSX.Element {
     change2: false,
     change3: false,
   });
-  
+
   return (
     <form>
       <legend>Количество пересадок</legend>

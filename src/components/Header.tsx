@@ -1,9 +1,12 @@
 import { ReactComponent as Logo } from '../logo.svg';
+import Container from './Container';
 
 function Header (): JSX.Element {
   return (
     <header>
-      <Logo />
+      <Container>
+        <Logo />
+      </Container>
     </header>
   )
 }
