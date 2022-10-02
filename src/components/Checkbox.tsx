@@ -26,7 +26,7 @@ const CheckboxLabel = styled.label<{checked: boolean}>`
     width: 20px;
     height: 20px;
 
-    border: ${({checked}) => checked ? '1px solid #2196F3' : '1px solid #9ABBCE'};
+    border: ${({checked}) => checked ? '1px solid var(--dodger-blue)' : '1px solid var(--heather)'};
     border-radius: 2px;
   }
 `

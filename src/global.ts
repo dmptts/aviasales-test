@@ -29,6 +29,12 @@ export default createGlobalStyle`
       url(${OpenSansSemiboldWoff}) format("woff");
   }
 
+  :root {
+    --charcoal: #4A4A4A;
+    --heather: #9ABBCE;
+    --dodger-blue: #2196F3;
+  }
+
   *,
   *::before,
   *::after {
@@ -48,7 +54,7 @@ export default createGlobalStyle`
     font-size: 16px;
     line-height: 1.5;
     font-family: "Open Sans", Arial, sans-serif;
-    color: #4A4A4A;
+    color: var(--charcoal);
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -156,3 +162,9 @@ export const visuallyHidden = css`
   -webkit-clip-path: inset(100%);
   clip-path: inset(100%);
 `
+
+// export const colors = {
+//   charcoal: '#4A4A4A',
+//   heather: '#9ABBCE',
+//   dodgerBlue: '#2196F3',
+// }
