@@ -1,8 +1,33 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import OpenSansRegularWoff from './fonts/opensans-regular.woff';
+import OpenSansRegularWoff2 from './fonts/opensans-regular.woff2';
+import OpenSansSemiboldWoff from './fonts/opensans-semibold.woff'
+import OpenSansSemiboldWoff2 from './fonts/opensans-semibold.woff2'
+
 
 export default createGlobalStyle`
   ${normalize}
+
+  @font-face {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "Open Sans";
+    font-display: swap;
+    src:
+      url(${OpenSansRegularWoff2}) format("woff2"),
+      url(${OpenSansRegularWoff}) format("woff");
+  }
+
+  @font-face {
+    font-style: normal;
+    font-weight: 600;
+    font-family: "Open Sans";
+    font-display: swap;
+    src:
+      url(${OpenSansSemiboldWoff2}) format("woff2"),
+      url(${OpenSansSemiboldWoff}) format("woff");
+  }
 
   *,
   *::before,
@@ -22,8 +47,8 @@ export default createGlobalStyle`
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    font-family: Arial;
-    color: #000000;
+    font-family: "Open Sans", Arial, sans-serif;
+    color: #4A4A4A;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -115,4 +140,19 @@ export default createGlobalStyle`
   [type="reset"],
   [type="submit"] {
     appearance: none;
-  }`
+  }
+`
+
+export const visuallyHidden = css`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+`
