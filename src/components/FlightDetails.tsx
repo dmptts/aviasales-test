@@ -1,31 +1,53 @@
+import styled from 'styled-components';
+
+const DetailsBody = styled.div`
+  display: flex;
+  gap: 20px;
+`
+
+const DetailsSegment = styled.div`
+  width: 140px;
+`
+
+const UpperSegment = styled.div`
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--gull-grey);
+`
+
+const LowerSegment = styled.div`
+  font-size: 0.875em;
+  font-weight: 600;
+`
+
 function FlightDetails (): JSX.Element {
   return (
-    <div>
-      <div>
-        <div>
+    <DetailsBody>
+      <DetailsSegment>
+        <UpperSegment>
           MOW – HKT
-        </div>
-        <div>
+        </UpperSegment>
+        <LowerSegment>
           10:45 – 08:00
-        </div>
-      </div>
-      <div>
-        <div>
+        </LowerSegment>
+      </DetailsSegment>
+      <DetailsSegment>
+        <UpperSegment>
           В пути
-        </div>
-        <div>
+        </UpperSegment>
+        <LowerSegment>
           21ч 15м
-        </div>
-      </div>
-      <div>
-        <div>
+        </LowerSegment>
+      </DetailsSegment>
+      <DetailsSegment>
+        <UpperSegment>
           2 пересадки
-        </div>
-        <div>
+        </UpperSegment>
+        <LowerSegment>
           HKG, JNB
-        </div>
-      </div>
-    </div>
+        </LowerSegment>
+      </DetailsSegment>
+    </DetailsBody>
   )
 }
 

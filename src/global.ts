@@ -30,9 +30,12 @@ export default createGlobalStyle`
   }
 
   :root {
+    --default-white: #FFFFFF;
     --charcoal: #4A4A4A;
     --heather: #9ABBCE;
     --dodger-blue: #2196F3;
+    --alex-blue: #F3F7FA;
+    --gull-grey: #A0B0B9;
   }
 
   *,
@@ -65,7 +68,7 @@ export default createGlobalStyle`
     width: 100%;
     height: 100%;
 
-    background-color: #FFFFFF;
+    background-color: var(--alex-blue);
   }
 
   a {
