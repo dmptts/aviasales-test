@@ -1,4 +1,17 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+import Checkbox from './Checkbox';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+
+const Legend = styled.legend`
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+`
 
 function Filter (): JSX.Element {
   const [filterState, setFilterState] = useState({
@@ -9,20 +22,47 @@ function Filter (): JSX.Element {
     change3: false,
   });
 
+  const setter = (id: keyof typeof filterState, payload: boolean) => {
+    setFilterState({
+      ...filterState,
+      [id]: payload
+    })
+  }
+
   return (
-    <form>
-      <legend>Количество пересадок</legend>
-      <input id='all-checkbox' type='checkbox'></input>
-      <label htmlFor="all-checkbox">Все</label>
-      <input id='no-change-checkbox' type='checkbox'></input>
-      <label htmlFor="no-change-checkbox">Без пересадок</label>
-      <input id='1-change-checkbox' type='checkbox'></input>
-      <label htmlFor="1-change-checkbox">1 пересадка</label>
-      <input id='2-change-checkbox' type='checkbox'></input>
-      <label htmlFor="2-change-checkbox">2 пересадки</label>
-      <input id='3-change-checkbox' type='checkbox'></input>
-      <label htmlFor="3-change-checkbox">3 пересадки</label>
-    </form>
+    <Form>
+      <Legend>Количество пересадок</Legend>
+      <Checkbox
+        id='all-checkbox'
+        label='Все'
+        state={filterState.all}
+        setter={(payload) => setter('all', payload)}
+      />
+      <Checkbox
+        id='no-change-checkbox'
+        label='Без пересадок'
+        state={filterState.noChange}
+        setter={(payload) => setter('noChange', payload)}
+      />
+      <Checkbox
+        id='1-change-checkbox'
+        label='1 пересадка'
+        state={filterState.change1}
+        setter={(payload) => setter('change1', payload)}
+      />
+      <Checkbox
+        id='2-change-checkbox'
+        label='2 пересадка'
+        state={filterState.change2}
+        setter={(payload) => setter('change2', payload)}
+      />
+      <Checkbox
+        id='3-change-checkbox'
+        label='3 пересадка'
+        state={filterState.change3}
+        setter={(payload) => setter('change3', payload)}
+      />
+    </Form>
   )
 }
 

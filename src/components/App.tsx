@@ -1,3 +1,4 @@
+import Container from './Container';
 import Filter from './Filter';
 import Header from './Header';
 import MoreBtn from './More';
@@ -9,12 +10,14 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <Filter />
-        <div>
-          <Sorting />
-          <TicketList />
-          <MoreBtn />
-        </div>
+        <Container>
+          <Filter />
+          <div>
+            <Sorting />
+            <TicketList />
+            <MoreBtn />
+          </div>
+        </Container>
       </main>
     </div>
   );
