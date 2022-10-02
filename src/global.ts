@@ -165,9 +165,3 @@ export const visuallyHidden = css`
   -webkit-clip-path: inset(100%);
   clip-path: inset(100%);
 `
-
-// export const colors = {
-//   charcoal: '#4A4A4A',
-//   heather: '#9ABBCE',
-//   dodgerBlue: '#2196F3',
-// }

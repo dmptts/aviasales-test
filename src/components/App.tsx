@@ -1,9 +1,9 @@
 import Container from './Container';
 import Filter from './Filter';
 import Header from './Header';
-import MoreBtn from './More';
 import Sorting from './Sorting';
 import TicketList from './TicketList';
+import Button from './Button';
 
 function App() {
   return (
@@ -11,11 +11,13 @@ function App() {
       <Header />
       <main>
         <Container>
-          <Filter />
+          <aside>
+            <Filter />
+          </aside>
           <div>
             <Sorting />
             <TicketList />
-            <MoreBtn />
+            <Button>Показать еще 5 билетов!</Button>
           </div>
         </Container>
       </main>
