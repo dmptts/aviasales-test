@@ -4,13 +4,19 @@ import Header from './Header';
 import Sorting from './Sorting';
 import TicketList from './TicketList';
 import Button from './Button';
+import styled from 'styled-components';
+
+const MainContainer = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+`
 
 function App() {
   return (
     <div className="App">
       <Header />
       <main>
-        <Container>
+        <MainContainer>
           <aside>
             <Filter />
           </aside>
@@ -19,7 +25,7 @@ function App() {
             <TicketList />
             <Button>Показать еще 5 билетов!</Button>
           </div>
-        </Container>
+        </MainContainer>
       </main>
     </div>
   );
