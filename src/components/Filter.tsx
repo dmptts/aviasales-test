@@ -8,9 +8,14 @@ const Form = styled.form`
 `
 
 const Legend = styled.legend`
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 function Filter (): JSX.Element {

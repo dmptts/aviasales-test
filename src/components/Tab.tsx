@@ -12,13 +12,24 @@ const TabButton = styled.button<{isActive: boolean}>`
 
   font-size: 0.75em;
   font-weight: 600;
-  color: ${({isActive}) => isActive ? 'var(--default-white)' : 'var(--charcoal)'};
+  color: ${({isActive}) => isActive
+    ? 'var(--default-white)'
+    : 'var(--charcoal)'};
   text-transform: uppercase;
 
-  background-color: ${({isActive}) => isActive ? 'var(--dodger-blue)' : 'var(--default-white)'};
-  border: 1px solid ${({isActive}) => isActive ? 'var(--dodger-blue)' : 'var(--solitude)'};
+  background-color: ${({isActive}) => isActive
+    ? 'var(--dodger-blue)'
+    : 'var(--default-white)'};
+  border: 1px solid ${({isActive}) => isActive
+    ? 'var(--dodger-blue)'
+    : 'var(--solitude)'};
 
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({isActive}) => !isActive 
+      && 'var(--azure)'};
+  }
 `
 
 function Tab <T extends string | number>({value, isActive, children}: TabProps<T>): JSX.Element {

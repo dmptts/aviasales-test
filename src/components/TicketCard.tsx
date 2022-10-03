@@ -11,6 +11,7 @@ const Ticket = styled.li`
   background-color: var(--default-white);
   border-radius: 5px;
   box-shadow: 0px 2px 8px rgba(var(--default-white), 0.1);
+  cursor: pointer;
 `
 
 const TicketHeader = styled.div`

@@ -37,6 +37,7 @@ export default createGlobalStyle`
     --alex-blue: #F3F7FA;
     --gull-grey: #A0B0B9;
     --solitude: #DFE5EC;
+    --azure: #F1FCFF;
   }
 
   *,
@@ -154,7 +155,7 @@ export default createGlobalStyle`
 `
 
 export const visuallyHidden = css`
-  position: absolute;
+  /* position: absolute;
   width: 1px;
   height: 1px;
   margin: -1px;
@@ -164,5 +165,15 @@ export const visuallyHidden = css`
   border: 0;
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
+  clip-path: inset(100%); */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
   clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 `
