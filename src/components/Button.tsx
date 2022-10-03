@@ -19,6 +19,7 @@ const ButtonElem = styled.button`
   background-color: var(--dodger-blue);
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 `
 
 function Button ({children}: ButtonProps): JSX.Element {

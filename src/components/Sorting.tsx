@@ -1,10 +1,17 @@
+import {useState} from 'react';
+import {SortingTypes} from '../const';
+import Tab from './Tab';
+import Tabs from './Tabs';
+
 function Sorting (): JSX.Element {
+  const [currentSorting, setCurrentSorting] = useState<SortingTypes>(SortingTypes.Cheaper);
+  
   return (
-    <div>
-      <button>Самый дешевый</button>
-      <button>Самый быстрый</button>
-      <button>Оптимальный</button>
-    </div>
+    <Tabs setter={setCurrentSorting} currentTab={currentSorting}>
+      <Tab value={SortingTypes.Cheaper}>Самый дешевый</Tab>
+      <Tab value={SortingTypes.Faster}>Самый быстрый</Tab>
+      <Tab value={SortingTypes.Optimal}>Оптимальный</Tab>
+    </Tabs>
   )
 }
 

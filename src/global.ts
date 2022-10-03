@@ -36,6 +36,7 @@ export default createGlobalStyle`
     --dodger-blue: #2196F3;
     --alex-blue: #F3F7FA;
     --gull-grey: #A0B0B9;
+    --solitude: #DFE5EC;
   }
 
   *,
