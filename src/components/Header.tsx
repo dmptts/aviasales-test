@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from '../logo.svg';
+import { ReactComponent as Logo } from '../img/logo.svg';
 import Container from './Container';
 
 function Header (): JSX.Element {

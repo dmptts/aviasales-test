@@ -1,6 +1,6 @@
 import FlightDetails from './FlightDetails';
-import s7Logo from '../s7-logo.png';
-import s7Logo2x from '../s7-logo@2x.png'
+import s7Logo from '../img/s7-logo.png';
+import s7Logo2x from '../img/s7-logo@2x.png'
 import styled from 'styled-components';
 
 const Ticket = styled.li`
