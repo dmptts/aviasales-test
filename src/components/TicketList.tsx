@@ -1,5 +1,9 @@
+import {useEffect} from 'react';
 import styled from 'styled-components';
+import {useAppDispatch, useAppSelector} from '../hooks';
+import {fetchSearchId, fetchTickets, Ticket} from '../store/ticketsSlice';
 import TicketCard from './TicketCard';
+import { nanoid } from '@reduxjs/toolkit';
 
 const List = styled.ul`
   display: flex;
@@ -12,13 +16,23 @@ const List = styled.ul`
 `
 
 function TicketList (): JSX.Element {
+  const dispatch = useAppDispatch();
+  const searchId = useAppSelector((state) => state.tickets.searchId);
+  const tickets = useAppSelector((state) => state.tickets.entities);
+
+  useEffect(() => {
+    dispatch(fetchSearchId());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (searchId) {
+      dispatch(fetchTickets(searchId));
+    }
+  }, [dispatch, searchId])
+
   return (
     <List>
-      <TicketCard />
-      <TicketCard />
-      <TicketCard />
-      <TicketCard />
-      <TicketCard />
+      {tickets.map((ticket: Ticket) => <TicketCard key={nanoid()} ticket={ticket}/>)}
     </List>
   )
 }

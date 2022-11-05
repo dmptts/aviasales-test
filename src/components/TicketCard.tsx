@@ -2,8 +2,9 @@ import FlightDetails from './FlightDetails';
 import s7Logo from '../img/s7-logo.png';
 import s7Logo2x from '../img/s7-logo@2x.png'
 import styled from 'styled-components';
+import {Ticket} from '../store/ticketsSlice';
 
-const Ticket = styled.li`
+const StyledTicket = styled.li`
   width: 502px;
   min-height: 184px;
   padding: 20px;
@@ -32,9 +33,13 @@ const TicketBody = styled.div`
   gap: 10px;
 `
 
-function TicketCard (): JSX.Element {
+type TicketCardProps = {
+  ticket: Ticket
+}
+
+function TicketCard ({ ticket }: TicketCardProps): JSX.Element {
   return (
-    <Ticket>
+    <StyledTicket>
       <TicketHeader>
         <TicketPrice>13 400 Р</TicketPrice>
         <img src={s7Logo} srcSet={s7Logo2x} width='110' height='36' alt='Логотип авиакомпании' />
@@ -43,7 +48,7 @@ function TicketCard (): JSX.Element {
         <FlightDetails />
         <FlightDetails />
       </TicketBody>
-    </Ticket>
+    </StyledTicket>
   )
 }
 
