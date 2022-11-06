@@ -19,4 +19,5 @@ export enum LoadingStatuses {
 export const ApiUrls = {
   SearchId: () => 'https://front-test.dev.aviasales.ru/search',
   Tickets: (searchId: string) => `https://front-test.dev.aviasales.ru/tickets?searchId=${searchId}`,
+  CarrierLogo: (iata: string) => `//pics.avs.io/99/36/${iata}.png`
 }

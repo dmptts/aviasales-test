@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getFormattedCount } from '../utils';
 
 const DetailsBody = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const DetailsSegment = styled.div`
 const UpperSegment = styled.div`
   font-size: 0.75em;
   font-weight: 600;
+  text-transform: uppercase;
   color: var(--gull-grey);
 `
 
@@ -20,15 +22,49 @@ const LowerSegment = styled.div`
   font-weight: 600;
 `
 
-function FlightDetails (): JSX.Element {
+type FlightDetailsProps = {
+  details: {
+    origin: string,
+    destination: string,
+    date: string,
+    stops: string[],
+    duration: number,
+  },
+};
+
+function FlightDetails ({ details }: FlightDetailsProps): JSX.Element {
+  const { origin, destination, date, duration, stops } = details;
+  
+  const getFormattedTimes = () => {
+    const departureTime = new Date(date);
+    const arrivalTime = new Date(departureTime.getTime() + duration * 60 * 1000);
+
+    const formattedDepartureHour = departureTime.getHours() < 10 ? `0${departureTime.getHours()}` : `${departureTime.getHours()}`;
+    const formattedDepartureMinute = departureTime.getMinutes() < 10 ? `0${departureTime.getMinutes()}` : `${departureTime.getMinutes()}`;
+    const formattedArrivalHour = arrivalTime.getHours() < 10 ? `0${arrivalTime.getHours()}` : `${arrivalTime.getHours()}`;
+    const formattedArrivalMinute = arrivalTime.getMinutes() < 10 ? `0${arrivalTime.getMinutes()}` : `${arrivalTime.getMinutes()}`;
+
+    const formattedDepartureTime = `${formattedDepartureHour}:${formattedDepartureMinute}`;
+    const formattedArrivalTime = `${formattedArrivalHour}:${formattedArrivalMinute}`;
+
+    return `${formattedDepartureTime} - ${formattedArrivalTime}`
+  }
+
+  const getFormattedDuration = () => {
+    const days = Math.floor(duration / 60 / 24);
+    const hours = Math.floor((duration - days * 24 * 60) / 60);
+    const minutes = duration % 60;
+    return `${days ? `${days}д `: ''}${hours ? `${hours}ч `: ''}${minutes}м`;
+  }
+
   return (
     <DetailsBody>
       <DetailsSegment>
         <UpperSegment>
-          MOW – HKT
+          {origin} – {destination}
         </UpperSegment>
         <LowerSegment>
-          10:45 – 08:00
+          {getFormattedTimes()}
         </LowerSegment>
       </DetailsSegment>
       <DetailsSegment>
@@ -36,19 +72,25 @@ function FlightDetails (): JSX.Element {
           В пути
         </UpperSegment>
         <LowerSegment>
-          21ч 15м
+          {getFormattedDuration()}
         </LowerSegment>
       </DetailsSegment>
       <DetailsSegment>
         <UpperSegment>
-          2 пересадки
+          {`${stops.length !== 0 ? stops.length : ''} ${getFormattedCount(
+            stops.length,
+            'Без пересадок',
+            'Пересадка',
+            'Пересадки',
+            'Пересадок'
+          )}`}
         </UpperSegment>
         <LowerSegment>
-          HKG, JNB
+          {stops.join(', ')}
         </LowerSegment>
       </DetailsSegment>
     </DetailsBody>
-  )
-}
+  );
+};
 
 export default FlightDetails;

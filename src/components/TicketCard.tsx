@@ -1,8 +1,7 @@
 import FlightDetails from './FlightDetails';
-import s7Logo from '../img/s7-logo.png';
-import s7Logo2x from '../img/s7-logo@2x.png'
 import styled from 'styled-components';
-import {Ticket} from '../store/ticketsSlice';
+import { Ticket } from '../store/ticketsSlice';
+import { ApiUrls } from '../const';
 
 const StyledTicket = styled.li`
   width: 502px;
@@ -38,15 +37,17 @@ type TicketCardProps = {
 }
 
 function TicketCard ({ ticket }: TicketCardProps): JSX.Element {
+  const { price, carrier, segments } = ticket;
+
   return (
     <StyledTicket>
       <TicketHeader>
-        <TicketPrice>13 400 Р</TicketPrice>
-        <img src={s7Logo} srcSet={s7Logo2x} width='110' height='36' alt='Логотип авиакомпании' />
+        <TicketPrice>{price.toLocaleString('ru')} Р</TicketPrice>
+        <img src={ApiUrls.CarrierLogo(carrier)} width='110' height='40' alt={`Логотип ${carrier}`}  />
       </TicketHeader>
       <TicketBody>
-        <FlightDetails />
-        <FlightDetails />
+        <FlightDetails details={segments[0]} />
+        <FlightDetails details={segments[1]} />
       </TicketBody>
     </StyledTicket>
   )
