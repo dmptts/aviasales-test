@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
 import {ApiUrls, LoadingStatuses} from '../const';
 
 export type Ticket = {
@@ -26,12 +26,7 @@ export type TicketsState = {
   entities: Ticket[],
   searchId: string | null,
   loading: LoadingStatuses,
-  error: null,
-}
-
-type TicketResponse = {
-  tickets: Ticket[],
-  stop: boolean,
+  error: null | SerializedError,
 }
 
 export const fetchSearchId = createAsyncThunk<string>(
@@ -43,13 +38,23 @@ export const fetchSearchId = createAsyncThunk<string>(
   }
 )
 
-export const fetchTickets = createAsyncThunk<TicketResponse, string>(
+export const fetchTickets = createAsyncThunk<any ,string>(
   'tickets/fetchTickets',
-  async (searchId) => {
-    const response = await fetch(ApiUrls.Tickets(searchId))
-      .then((response) => response.json());
-    console.log(response);
-    return response;
+  async (searchId, {dispatch}) => {
+    try {
+      const response = await fetch(ApiUrls.Tickets(searchId))
+        .then((response) => response.json());
+
+      if(!response.stop) {
+        dispatch(actions.addTickets(response.tickets));
+        dispatch(fetchTickets(searchId));
+        return;
+      }
+  
+      dispatch(actions.addTickets(response.tickets));
+    } catch (err) {
+      dispatch(fetchTickets(searchId));
+    }
   }
 )
 
@@ -63,14 +68,15 @@ const initialState: TicketsState = {
 const ticketsSlice = createSlice({
   name: 'tickets',
   initialState,
-  reducers: { },
+  reducers: {
+    addTickets: (state, action) => {
+      state.entities = state.entities.concat(action.payload);
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchSearchId.fulfilled, (state, action) => {
         state.searchId = action.payload;
-      })
-      .addCase(fetchTickets.fulfilled, (state, action) => {
-        state.entities = state.entities.concat(action.payload.tickets);
       })
   },
 });

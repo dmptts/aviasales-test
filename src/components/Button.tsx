@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 type ButtonProps = {
-  children: string
+  children: string,
+  clickHandler: () => void,
 }
 
 const ButtonElem = styled.button`
@@ -22,9 +23,9 @@ const ButtonElem = styled.button`
   cursor: pointer;
 `
 
-function Button ({children}: ButtonProps): JSX.Element {
+function Button ({ children, clickHandler }: ButtonProps): JSX.Element {
   return (
-    <ButtonElem>{children}</ButtonElem>
+    <ButtonElem onClick={clickHandler}>{children}</ButtonElem>
   )
 }
 

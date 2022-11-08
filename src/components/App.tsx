@@ -3,7 +3,6 @@ import Filter from './Filter';
 import Header from './Header';
 import Sorting from './Sorting';
 import TicketList from './TicketList';
-import Button from './Button';
 import styled from 'styled-components';
 
 const MainContainer = styled(Container)`
@@ -41,7 +40,6 @@ function App() {
           <MainContent>
             <Sorting />
             <TicketList />
-            <Button>Показать еще 5 билетов!</Button>
           </MainContent>
         </MainContainer>
       </main>
