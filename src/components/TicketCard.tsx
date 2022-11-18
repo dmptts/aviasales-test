@@ -1,7 +1,6 @@
 import FlightDetails from './FlightDetails';
 import styled from 'styled-components';
-import { Ticket } from '../store/ticketsSlice';
-import { ApiUrls } from '../const';
+import { ApiUrls, Ticket } from '../const';
 
 const StyledTicket = styled.li`
   width: 502px;

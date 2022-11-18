@@ -4,16 +4,32 @@ export enum SortingTypes {
   Optimal = 'optimal',
 }
 
-// export enum ApiUrls {
-//   SearchId = 'https://front-test.dev.aviasales.ru/search',
-//   Tickets = 'https://front-test.dev.aviasales.ru/tickets',
-// }
-
 export enum LoadingStatuses {
   Idle = 'idle',
   Running = 'running',
   Complete = 'complete',
   Error = 'error'
+}
+
+export type Ticket = {
+  price: number
+  carrier: string
+  segments: [
+    {
+      origin: string
+      destination: string
+      date: string
+      stops: string[]
+      duration: number
+    },
+    {
+      origin: string
+      destination: string
+      date: string
+      stops: string[]
+      duration: number
+    },
+  ],
 }
 
 export const ApiUrls = {

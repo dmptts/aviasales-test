@@ -1,31 +1,11 @@
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import {ApiUrls, LoadingStatuses} from '../const';
-
-export type Ticket = {
-  price: number
-  carrier: string
-  segments: [
-    {
-      origin: string
-      destination: string
-      date: string
-      stops: string[]
-      duration: number
-    },
-    {
-      origin: string
-      destination: string
-      date: string
-      stops: string[]
-      duration: number
-    },
-  ],
-}
+import { ApiUrls, LoadingStatuses, SortingTypes, Ticket } from '../const';
 
 export type TicketsState = {
-  entities: Ticket[],
+  entities: Ticket[], 
   searchId: string | null,
-  loading: LoadingStatuses,
+  sortingType: SortingTypes,
+  loadingStatus: LoadingStatuses,
   error: null | SerializedError,
 }
 
@@ -52,6 +32,8 @@ export const fetchTickets = createAsyncThunk<any ,string>(
       }
   
       dispatch(actions.addTickets(response.tickets));
+      dispatch(actions.changeLoadingStatus(LoadingStatuses.Complete));
+      dispatch(actions.removeSearchId());
     } catch (err) {
       dispatch(fetchTickets(searchId));
     }
@@ -61,7 +43,8 @@ export const fetchTickets = createAsyncThunk<any ,string>(
 const initialState: TicketsState = {
   entities: [],
   searchId: null,
-  loading: LoadingStatuses.Idle,
+  sortingType: SortingTypes.Cheaper,
+  loadingStatus: LoadingStatuses.Idle,
   error: null,
 }
 
@@ -71,10 +54,22 @@ const ticketsSlice = createSlice({
   reducers: {
     addTickets: (state, action) => {
       state.entities = state.entities.concat(action.payload);
+    },
+    removeSearchId: (state) => {
+      state.searchId = null;
+    },
+    changeSorting: (state, action) => {
+      state.sortingType = action.payload;
+    },
+    changeLoadingStatus: (state, action) => {
+      state.loadingStatus = action.payload;
     }
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchSearchId.pending, (state, action) => {
+        state.loadingStatus = LoadingStatuses.Running;
+      })
       .addCase(fetchSearchId.fulfilled, (state, action) => {
         state.searchId = action.payload;
       })

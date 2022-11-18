@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchSearchId, fetchTickets, Ticket } from '../store/ticketsSlice';
-import TicketCard from './TicketCard';
 import { nanoid } from '@reduxjs/toolkit';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { fetchSearchId, fetchTickets } from '../store/ticketsSlice';
+import { Ticket } from '../const';
+import { sortTickets } from '../utils/sorting';
+import TicketCard from './TicketCard';
 import Button from './Button';
 
 const List = styled.ul`
@@ -18,8 +20,9 @@ const List = styled.ul`
 
 function TicketList (): JSX.Element {
   const dispatch = useAppDispatch();
-  const searchId = useAppSelector((state) => state.tickets.searchId);
-  const tickets = useAppSelector((state) => state.tickets.entities);
+  const { searchId, sortingType } = useAppSelector((state) => state.tickets);
+  const unprocessedTickets = useAppSelector((state) => state.tickets.entities);
+  const [tickets, setTickets] = useState<Ticket[]>(unprocessedTickets);
   const [shownTicketCount, setShownTicketCount] = useState<number>(5);
 
   const btnClickHandler = () => {
@@ -34,7 +37,15 @@ function TicketList (): JSX.Element {
     if (searchId) {
       dispatch(fetchTickets(searchId));
     }
-  }, [dispatch, searchId])
+  }, [dispatch, searchId]);
+
+  useEffect(() => {
+    setTickets(sortTickets([...unprocessedTickets], sortingType));
+  }, [sortingType, unprocessedTickets])
+
+  useEffect(() => {
+    console.log(tickets);
+  }, [tickets]);
 
   return (
     <>

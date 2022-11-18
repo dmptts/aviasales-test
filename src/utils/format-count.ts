@@ -1,4 +1,4 @@
-export const getFormattedCount = (
+export const formatCount = (
   amount: number,
   zero: string,
   one: string,
@@ -24,5 +24,4 @@ export const getFormattedCount = (
   } else {
     return zero;
   }
-  
 }

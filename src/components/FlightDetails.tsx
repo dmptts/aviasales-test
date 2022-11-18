@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getFormattedCount } from '../utils';
+import { formatCount } from '../utils/format-count';
 
 const DetailsBody = styled.div`
   display: flex;
@@ -77,7 +77,7 @@ function FlightDetails ({ details }: FlightDetailsProps): JSX.Element {
       </DetailsSegment>
       <DetailsSegment>
         <UpperSegment>
-          {`${stops.length !== 0 ? stops.length : ''} ${getFormattedCount(
+          {`${stops.length !== 0 ? stops.length : ''} ${formatCount(
             stops.length,
             'Без пересадок',
             'Пересадка',
