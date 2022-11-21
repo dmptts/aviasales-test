@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import ticketsReducer from './ticketsSlice';
 
 const store = configureStore({

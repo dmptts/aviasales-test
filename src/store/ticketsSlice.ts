@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
-import { ApiUrls, LoadingStatuses, SortingTypes, Ticket } from '../const';
+import { ApiUrls, LoadingStatuses, SortingTypes, StopsFilterType, Ticket } from '../const';
 
 export type TicketsState = {
   entities: Ticket[], 
   searchId: string | null,
   sortingType: SortingTypes,
+  stopsFilter: StopsFilterType,
   loadingStatus: LoadingStatuses,
   error: null | SerializedError,
 }
@@ -44,6 +45,13 @@ const initialState: TicketsState = {
   entities: [],
   searchId: null,
   sortingType: SortingTypes.Cheaper,
+  stopsFilter: {
+    all: true,
+    noChange: false,
+    change1: false,
+    change2: false,
+    change3: false,
+  },
   loadingStatus: LoadingStatuses.Idle,
   error: null,
 }
@@ -63,11 +71,22 @@ const ticketsSlice = createSlice({
     },
     changeLoadingStatus: (state, action) => {
       state.loadingStatus = action.payload;
+    },
+    changeStopsFilter: (state, action) => {
+      Object.values(action.payload).every((value) => value === false)
+      ? state.stopsFilter = {
+        all: true,
+        noChange: false,
+        change1: false,
+        change2: false,
+        change3: false,
+      }
+      : state.stopsFilter = action.payload;
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchSearchId.pending, (state, action) => {
+      .addCase(fetchSearchId.pending, (state) => {
         state.loadingStatus = LoadingStatuses.Running;
       })
       .addCase(fetchSearchId.fulfilled, (state, action) => {

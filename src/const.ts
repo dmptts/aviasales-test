@@ -30,6 +30,14 @@ export type Ticket = {
       duration: number
     },
   ],
+};
+
+export type StopsFilterType = {
+  all: boolean,
+  noChange: boolean,
+  change1: boolean,
+  change2: boolean,
+  change3: boolean,
 }
 
 export const ApiUrls = {

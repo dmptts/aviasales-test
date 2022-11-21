@@ -20,8 +20,9 @@ const List = styled.ul`
 
 function TicketList (): JSX.Element {
   const dispatch = useAppDispatch();
-  const { searchId, sortingType } = useAppSelector((state) => state.tickets);
+  const { searchId, sortingType, stopsFilter } = useAppSelector((state) => state.tickets);
   const unprocessedTickets = useAppSelector((state) => state.tickets.entities);
+  const [filteredTickets, setFilteredTickets] = useState(unprocessedTickets);
   const [tickets, setTickets] = useState<Ticket[]>(unprocessedTickets);
   const [shownTicketCount, setShownTicketCount] = useState<number>(5);
 
@@ -40,12 +41,20 @@ function TicketList (): JSX.Element {
   }, [dispatch, searchId]);
 
   useEffect(() => {
-    setTickets(sortTickets([...unprocessedTickets], sortingType));
-  }, [sortingType, unprocessedTickets])
+    const stops: number[] = [];
+    stopsFilter.noChange && stops.push(0);
+    stopsFilter.change1 && stops.push(1);
+    stopsFilter.change2 && stops.push(2);
+    stopsFilter.change3 && stops.push(3);
+
+    stops.length > 0
+    ? setFilteredTickets(unprocessedTickets.filter((ticket) => stops.includes(ticket.segments[0].stops.length) && stops.includes(ticket.segments[1].stops.length)))
+    : setFilteredTickets(unprocessedTickets);
+  }, [unprocessedTickets, stopsFilter]);
 
   useEffect(() => {
-    console.log(tickets);
-  }, [tickets]);
+    setTickets(sortTickets([...filteredTickets], sortingType));
+  }, [sortingType, filteredTickets]);
 
   return (
     <>
@@ -55,6 +64,6 @@ function TicketList (): JSX.Element {
       <Button clickHandler={btnClickHandler}>Показать еще 5 билетов!</Button>
     </>
   )
-}
+};
 
 export default TicketList;
