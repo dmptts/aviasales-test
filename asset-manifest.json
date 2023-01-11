@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.js": "/aviasales-test-gh-pages/static/js/main.58abe8b1.js",
+    "static/media/opensans-regular.woff": "/aviasales-test-gh-pages/static/media/opensans-regular.6c5acfa99c83633bb078.woff",
+    "static/media/opensans-semibold.woff": "/aviasales-test-gh-pages/static/media/opensans-semibold.ad9bc43d5d0309e8bd2e.woff",
+    "static/media/opensans-regular.woff2": "/aviasales-test-gh-pages/static/media/opensans-regular.3ef06ba3c7099e63c9ce.woff2",
+    "static/media/opensans-semibold.woff2": "/aviasales-test-gh-pages/static/media/opensans-semibold.a7e5d5e944cf5e03d5d6.woff2",
+    "static/media/logo.svg": "/aviasales-test-gh-pages/static/media/logo.715973de57e0ed799ad1a22e31028ba6.svg",
+    "index.html": "/aviasales-test-gh-pages/index.html",
+    "static/media/icon-tick.svg": "/aviasales-test-gh-pages/static/media/icon-tick.3b1f8bb7a1c4d983ba54000d24b32874.svg",
+    "main.58abe8b1.js.map": "/aviasales-test-gh-pages/static/js/main.58abe8b1.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.58abe8b1.js"
+  ]
+}
